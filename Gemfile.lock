@@ -1,0 +1,16 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activerdf (1.6.11)
+      gem_plugin (>= 0.2.1)
+    addressable (2.3.2)
+    gem_plugin (0.2.3)
+    rdf (0.3.11.1)
+      addressable (>= 2.2.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activerdf
+  rdf
