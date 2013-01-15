@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+require 'rdf'
+require 'rdf/ntriples'
+
+include RDF
+
+# Load some RDF.rb project information into an in-memory graph:
+graph = RDF::Graph.load "http://rdf.rubyforge.org/doap.nt"
+
+# Construct a BGP query for obtaining developers' names and e-mails:
+query = RDF::Query.new({
+  :person => {
+    RDF.type  => FOAF.Person,
+    FOAF.name => :name,
+    FOAF.mbox => :email,
+  }
+})
+
+# Execute the query on our in-memory graph, printing out solutions:
+query.execute(graph).each do |solution|
+  puts "name=#{solution.name} email=#{solution.email}"
+end
