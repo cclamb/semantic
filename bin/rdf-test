@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+require 'rdf'
+require 'rdf/rdfxml'
+
+include RDF
+
+Dependancy_Data = 'http://www.snee.com/rdf/elvisimp.rdf'
+Dependancy_Data = 'http://www.w3.org/2005/03/css-dep/css3deps.rdf'
+
+# Load some RDF.rb project information into an in-memory graph:
+graph = RDF::Graph.load Dependancy_Data
+
+query = RDF::Query.new({
+	:document => {
+		RDF.type => 'http://www.w3.org/TR/2001/CR-css3-selectors-20011113/'
+	}
+})
+
+query.execute(graph).each do |solution|
+  puts solution.inspect
+end
+
+#puts FOAF.Person
+
+# query = RDF::Query.new({
+#   :person => {
+#     RDF.type  => FOAF.Person,
+#     FOAF.name => :name,
+#     FOAF.mbox => :email,
+#   }
+# })
+
+# query.execute(graph).each do |solution|
+#   puts solution.inspect
+# end
+
+# RDF::RDFXML::Reader.open(Dependancy_Data) do |reader|
+#   reader.each_statement do |statement|
+#     puts statement.inspect
+#   end
+# end
+
+# Construct a BGP query for obtaining developers' names and e-mails:
+# query = RDF::Query.new({
+#   :person => {
+#     RDF.type  => FOAF.Person,
+#     FOAF.name => :name,
+#     FOAF.mbox => :email,
+#   }
+# })
+
+# # Execute the query on our in-memory graph, printing out solutions:
+# query.execute(graph).each do |solution|
+#   puts "name=#{solution.name} email=#{solution.email}"
+# end

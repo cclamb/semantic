@@ -18,5 +18,7 @@
 #++
 source :rubygems
 
+gem 'nokogiri'
 gem 'rdf'
+gem 'rdf-rdfxml'
 gem 'activerdf'

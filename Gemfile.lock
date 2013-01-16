@@ -5,12 +5,20 @@ GEM
       gem_plugin (>= 0.2.1)
     addressable (2.3.2)
     gem_plugin (0.2.3)
+    nokogiri (1.5.6)
     rdf (0.3.11.1)
       addressable (>= 2.2.6)
+    rdf-rdfxml (0.3.9)
+      rdf (>= 0.3.11)
+      rdf-xsd (>= 0.3.8)
+    rdf-xsd (0.3.8)
+      rdf (>= 0.3.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   activerdf
+  nokogiri
   rdf
+  rdf-rdfxml
