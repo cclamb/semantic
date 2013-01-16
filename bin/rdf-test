@@ -1,25 +1,41 @@
 #!/usr/bin/env ruby
 require 'rdf'
 require 'rdf/rdfxml'
+#require 'rdf/ntriples'
 
 include RDF
 
-Dependancy_Data = 'http://www.snee.com/rdf/elvisimp.rdf'
+Original_Data = 'http://rdf.rubyforge.org/doap.nt'
+Elvis_Data = 'http://www.snee.com/rdf/elvisimp.rdf'
 Dependancy_Data = 'http://www.w3.org/2005/03/css-dep/css3deps.rdf'
 
-# Load some RDF.rb project information into an in-memory graph:
-graph = RDF::Graph.load Dependancy_Data
+def go_rdf!
+  # Load some RDF.rb project information into an in-memory graph:
+  graph = RDF::Graph.load Dependancy_Data
 
-query = RDF::Query.new({
-	:document => {
-		RDF.type => 'http://www.w3.org/TR/2001/CR-css3-selectors-20011113/'
-	}
-})
+    query = RDF::Query.new({
+    :document => {
+      RDF::URI('http://www.example.org/dep#dependsOn') => :dependency
+    }
+  })
 
-query.execute(graph).each do |solution|
-  puts solution.inspect
+  # query = RDF::Query.new({
+  # 	:document => {
+  # 		RDF::URI('http://www.example.org/dep#dependsOn') => RDF::URI('http://www.w3.org/TR/2001/CR-css3-selectors-20011113/')
+  # 	}
+  # })
+
+  # query = RDF::Query.new do
+  # 	pattern [:doc, RDF.type, RDF::URI('http://www.w3.org/TR/2001/CR-css3-selectors-20011113/')]
+  #   pattern [:doc, RDF::URI('http://www.example.org/dep#dependsOn'), :depends]
+  # end
+
+  query.execute(graph).each do |solution|
+    puts "document: #{solution.document}, dependency: #{solution.dependency}"
+    #puts solution.inspect
+  end
+
 end
-
 #puts FOAF.Person
 
 # query = RDF::Query.new({
@@ -40,16 +56,39 @@ end
 #   end
 # end
 
-# Construct a BGP query for obtaining developers' names and e-mails:
-# query = RDF::Query.new({
-#   :person => {
-#     RDF.type  => FOAF.Person,
-#     FOAF.name => :name,
-#     FOAF.mbox => :email,
-#   }
-# })
+def go_triples!
 
-# # Execute the query on our in-memory graph, printing out solutions:
-# query.execute(graph).each do |solution|
-#   puts "name=#{solution.name} email=#{solution.email}"
-# end
+  graph = RDF::Graph.load Original_Data
+
+  puts FOAF.Person.inspect
+  puts FOAF.name.inspect
+  puts FOAF.mbox.inspect
+
+  # Construct a BGP query for obtaining developers' names and e-mails:
+  query = RDF::Query.new({
+    :person => {
+      RDF::URI('http://www.w3.org/1999/02/22-rdf-syntax-ns#type') => RDF::URI('http://xmlns.com/foaf/0.1/Person')
+      #RDF.type  => RDF::URI('http://xmlns.com/foaf/0.1/Person'),
+      #RDF::URI('http://xmlns.com/foaf/0.1/name') => :the_name,
+      #RDF::URI('http://xmlns.com/foaf/0.1/mbox') => :the_email,
+    }
+  })
+
+  # query = RDF::Query.new({
+  #   :person => {
+  #     RDF.type  => FOAF.Person,
+  #     FOAF.name => :name,
+  #     FOAF.mbox => :email,
+  #   }
+  # })
+
+  # Execute the query on our in-memory graph, printing out solutions:
+  query.execute(graph).each do |solution|
+    #puts "name=#{solution.the_name} email=#{solution.the_email}"
+    #puts "name=#{solution.the_name}"
+    puts "solution = #{solution.inspect}"
+  end
+
+end
+
+go_rdf!

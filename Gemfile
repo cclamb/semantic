@@ -19,6 +19,7 @@
 source :rubygems
 
 gem 'nokogiri'
+gem 'equivalent-xml'
 gem 'rdf'
 gem 'rdf-rdfxml'
 gem 'activerdf'
