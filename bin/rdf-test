@@ -9,13 +9,36 @@ Original_Data = 'http://rdf.rubyforge.org/doap.nt'
 Elvis_Data = 'http://www.snee.com/rdf/elvisimp.rdf'
 Dependancy_Data = 'http://www.w3.org/2005/03/css-dep/css3deps.rdf'
 
-def go_rdf!
+# create a vocab for this.
+DEPENDS = RDF::Vocabulary.new 'http://www.example.org/dep#'
+EP = RDF::Vocabulary.new 'http://www.snee.com/ns/ep'
+
+def go_elvis!
+  graph = RDF::Graph.load Elvis_Data
+
+  query = RDF::Query.new({
+    :has_sample => {
+      EP['video-sample'] => :video_sample,
+      EP['name'] => :name
+    }
+
+  })
+
+  query.execute(graph).each do |solution|
+    puts "entertainer: #{solution.name}, sample: #{solution.video_sample}"
+    #puts solution.inspect
+  end
+end
+
+def go_dependency!
+
   # Load some RDF.rb project information into an in-memory graph:
   graph = RDF::Graph.load Dependancy_Data
 
-    query = RDF::Query.new({
+  query = RDF::Query.new({
     :document => {
-      RDF::URI('http://www.example.org/dep#dependsOn') => :dependency
+      DEPENDS.dependsOn => :dependency
+      #RDF::URI('http://www.example.org/dep#dependsOn') => :dependency
     }
   })
 
@@ -25,36 +48,12 @@ def go_rdf!
   # 	}
   # })
 
-  # query = RDF::Query.new do
-  # 	pattern [:doc, RDF.type, RDF::URI('http://www.w3.org/TR/2001/CR-css3-selectors-20011113/')]
-  #   pattern [:doc, RDF::URI('http://www.example.org/dep#dependsOn'), :depends]
-  # end
-
   query.execute(graph).each do |solution|
     puts "document: #{solution.document}, dependency: #{solution.dependency}"
     #puts solution.inspect
   end
 
 end
-#puts FOAF.Person
-
-# query = RDF::Query.new({
-#   :person => {
-#     RDF.type  => FOAF.Person,
-#     FOAF.name => :name,
-#     FOAF.mbox => :email,
-#   }
-# })
-
-# query.execute(graph).each do |solution|
-#   puts solution.inspect
-# end
-
-# RDF::RDFXML::Reader.open(Dependancy_Data) do |reader|
-#   reader.each_statement do |statement|
-#     puts statement.inspect
-#   end
-# end
 
 def go_triples!
 
@@ -91,4 +90,4 @@ def go_triples!
 
 end
 
-go_rdf!
+go_elvis!
