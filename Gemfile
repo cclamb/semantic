@@ -18,8 +18,25 @@
 #++
 source :rubygems
 
+#####
+# We specifiy gems for two RDF implementations, RDF.rb and ActiveRDF.
+#####
+
+#####
+# RDF.rb
+#####
+# Dependencies for RDF.rb.
 gem 'nokogiri'
 gem 'equivalent-xml'
+
+# RDF.rb and sparql client.
 gem 'rdf'
+gem 'sparql-client'
+
+# Plugins supporting different serialization formats for RDF.rb
 gem 'rdf-rdfxml'
+
+#####
+# Active RDF
+#####
 gem 'activerdf'

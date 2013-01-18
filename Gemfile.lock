@@ -7,6 +7,8 @@ GEM
     equivalent-xml (0.3.0)
       nokogiri (>= 1.4.3)
     gem_plugin (0.2.3)
+    json_pure (1.7.6)
+    net-http-persistent (2.8)
     nokogiri (1.5.6)
     rdf (0.3.11.1)
       addressable (>= 2.2.6)
@@ -15,6 +17,10 @@ GEM
       rdf-xsd (>= 0.3.8)
     rdf-xsd (0.3.8)
       rdf (>= 0.3.4)
+    sparql-client (0.3.3)
+      json_pure (>= 1.4.6)
+      net-http-persistent (>= 1.4.1)
+      rdf (>= 0.3.5)
 
 PLATFORMS
   ruby
@@ -25,3 +31,4 @@ DEPENDENCIES
   nokogiri
   rdf
   rdf-rdfxml
+  sparql-client

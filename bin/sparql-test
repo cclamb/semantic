@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+# require 'rdf'
+# require 'rdf/ntriples'
+
+# include RDF
+
+require 'sparql/client'
+
+Remote_Data = 'http://dbpedia.org/sparql'
+Local_Data = 'etc/movie-data.nt'
+
+sparql = SPARQL::Client.new Remote_Data #Local_Data
+
+Query=<<END_QUERY
+PREFIX fb:<http://rdf.freebase.com/ns/>
+SELECT ?who ?film
+WHERE{
+    ?film fb:film.film.directed_by ?who .
+    ?film fb:film.film.starring ?who .
+}
+END_QUERY
+
+result = sparql.query Query
+
+puts result.inspect
