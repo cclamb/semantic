@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
+# require 'rdf'
+# require 'rdf/ntriples'
 
+# include RDF
+
+require 'sparql/client'
 
 Remote_Data = 'http://dbpedia.org/sparql'
 Local_Data = 'file:/etc/movie-data.nt'
+
+sparql = SPARQL::Client.new Local_Data
 
 Short_Query = 'ASK WHERE { ?s ?p ?o }'
 
@@ -14,3 +21,7 @@ WHERE{
     ?film fb:film.film.starring ?who .
 }
 END_QUERY
+
+result = sparql.query Short_Query
+
+puts result.inspect

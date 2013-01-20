@@ -29,9 +29,10 @@ source :rubygems
 gem 'nokogiri'
 gem 'equivalent-xml'
 
-# RDF.rb and sparql client.
+# RDF.rb, sparql client, and ruby-sparql.
 gem 'rdf'
 gem 'sparql-client'
+gem 'sparql'
 
 # Plugins supporting different serialization formats for RDF.rb
 gem 'rdf-rdfxml'
