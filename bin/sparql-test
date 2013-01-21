@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby
+require 'rdf'
+require 'sparql'
 
+include RDF
+
+require 'rdf/ntriples'
 
 Remote_Data = 'http://dbpedia.org/sparql'
-Local_Data = 'file:/etc/movie-data.nt'
+Local_Data = 'etc/movie-data.nt'
 
 Short_Query = 'ASK WHERE { ?s ?p ?o }'
 
@@ -14,3 +19,7 @@ WHERE{
     ?film fb:film.film.starring ?who .
 }
 END_QUERY
+
+queryable = RDF::Repository.load Local_Data
+sse = SPARQL.parse("SELECT * WHERE { ?s ?p ?o }")
+puts sse.execute(queryable).to_s
