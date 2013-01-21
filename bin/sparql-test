@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
 require 'rdf'
+require 'rdf/n3'
 require 'sparql'
-
-include RDF
-
-require 'rdf/ntriples'
 
 Remote_Data = 'http://dbpedia.org/sparql'
 Local_Data = 'etc/movie-data.nt'
+Doap_Data = 'http://rdf.rubyforge.org/doap.nt'
 
 Short_Query = 'ASK WHERE { ?s ?p ?o }'
 
@@ -21,5 +19,5 @@ WHERE{
 END_QUERY
 
 queryable = RDF::Repository.load Local_Data
-sse = SPARQL.parse("SELECT * WHERE { ?s ?p ?o }")
+sse = SPARQL.parse Query
 puts sse.execute(queryable).to_s

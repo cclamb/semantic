@@ -36,6 +36,7 @@ gem 'sparql'
 
 # Plugins supporting different serialization formats for RDF.rb
 gem 'rdf-rdfxml'
+gem 'rdf-n3'
 
 #####
 # Active RDF
