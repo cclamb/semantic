@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'rdf'
+require 'rdf/rdfxml'
+require 'sparql'
+
+Ontology = 'etc/standard.owl'
+
+Query = 'SELECT * WHERE { ?s ?p ?o }'
+
+queryable = RDF::Repository.load Ontology
+sse = SPARQL.parse Query
+puts sse.execute(queryable).inspect
