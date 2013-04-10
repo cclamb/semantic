@@ -16,7 +16,7 @@
 # above. Any reproduction of technical data, computer software, or portions 
 # thereof marked with this legend must also reproduce the markings.
 #++
-source :rubygems
+source 'https://rubygems.org'
 
 #####
 # We specifiy gems for two RDF implementations, RDF.rb and ActiveRDF.

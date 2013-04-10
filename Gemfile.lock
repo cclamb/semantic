@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     activerdf (1.6.11)
       gem_plugin (>= 0.2.1)
