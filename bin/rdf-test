@@ -7,7 +7,7 @@ include RDF
 
 Original_Data = 'http://rdf.rubyforge.org/doap.nt'
 Elvis_Data = 'http://www.snee.com/rdf/elvisimp.rdf'
-Dependancy_Data = 'http://www.w3.org/2005/03/css-dep/css3deps.rdf'
+Dependency_Data = 'http://www.w3.org/2005/03/css-dep/css3deps.rdf'
 
 # create a vocab for this.
 DEPENDS = RDF::Vocabulary.new 'http://www.example.org/dep#'
@@ -33,7 +33,7 @@ end
 def go_dependency!
 
   # Load some RDF.rb project information into an in-memory graph:
-  graph = RDF::Graph.load Dependancy_Data
+  graph = RDF::Graph.load Dependency_Data
 
   query = RDF::Query.new({
     :document => {
