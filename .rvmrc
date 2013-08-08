@@ -3,7 +3,7 @@
 # Copied from the RVM project: http://rvm.io
 
 # ruby_string="ruby-1.9.3-p362"
-ruby_string="ruby-2.0.0-p195"
+ruby_string="ruby-2.0.0"
 gemset_name="semantic"
 
 if rvm list strings | grep -q "${ruby_string}" ; then
